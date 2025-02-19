@@ -1,0 +1,23 @@
+{
+  "name": "tugas-bootcamp",
+  "version": "1.0.0",
+  "description": "project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alfinsalam/projectBootcamp.git"
+  },
+  "author": "Alfin Salam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alfinsalam/projectBootcamp/issues"
+  },
+  "homepage": "https://github.com/alfinsalam/projectBootcamp#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
