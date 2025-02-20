@@ -1,21 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="assets/css/projek.css" />
-    <link rel="icon" href="assets/img/logoweb.jpg" />
-    <title>Personal Web</title>
-  </head>
-  <body>
-    <nav>
-      <ul class="navbar-left">
-        <img src="assets/img/logoweb.jpg" alt="logoweb" style="width: 60px" />
-        <li><a href="home.html"> Home </a></li>
-        <li><a href="project.html"> Project</a></li>
-      </ul>
-      <a class="navbar-right" href="contact.html">Contact Me</a>
-    </nav>
+{{#> layout currentPage="Project"}}
     <div class="container-form">
       <div class="bg-form">
         <h1 class="form-title">Add My Project</h1>
@@ -109,37 +92,4 @@
         </form>
       </div>
     </div>
-
-    <div class="bg-preview">
-      <h2 class="project-title">My Project</h2>
-
-      <div class="container-prview">
-        <div class="card-preview">
-          <div class="card-image">
-            <img class="card-img" src="assets/img/gambar.jpg" alt="Card Image" />
-          </div>
-          <div class="card-content">
-            <h2 class="card-title">Card Title</h2>
-            <p class="card-date">Posted on: <span>December 10, 2024</span></p>
-            <p class="card-description">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-              sit amet accumsan arcu.
-            </p>
-            <div class="card-actions">
-              <button class="edit-btn">Edit</button>
-              <button class="delete-btn">Delete</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        id="no-data-message"
-        style="display: none; color: red; text-align: center"
-      >
-        Data belum tersedia.
-      </div>
-    </div>
-
-    <script src="assets/js/projek.js"></script>
-  </body>
-</html>
+{{/layout}}

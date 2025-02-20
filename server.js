@@ -4,22 +4,25 @@ const port = 3000;
 const path = require("path");
 const hbs = require("hbs");
 
-const projetsRouter = require("./sumber/routes/projects");
-const contactRouter = require("./sumber/routes/contact");
-const { renderHome } = require("./sumber/controllers/HomeController");
-const { registerHelpers } = require("./sumber/config/handleBarsConfig");
+app.set("view engine", "hbs");
+app.set("views", path.join(__dirname, "views"));
+hbs.registerPartials(__dirname + "/views/partials", function (err) {});
+hbs.registerHelper("equal", function (a, b) {
+  return a === b;
+});
+app.use("/assets", express.static(path.join(__dirname, "assets")));
+console.log("Serving static files from:", path.join(__dirname, "assets"));
 
-require("./src/config/ViewConfig")(app, express, path, hbs);
-require("./src/config/expressConfig")(app, express);
-require("dotenv").config();
-registerHelpers(hbs);
+const { renderHome } = require("./controllers/homeController");
+const { renderProject } = require("./controllers/projectController");
+const { renderContact } = require("./controllers/contactController");
 
-app.get("/", renderHome);
+app.get("/home", renderHome);
+app.get("/contact", renderContact);
+app.get("/project", renderProject);
 
-// projects
-app.use("/projects", projetsRouter);
-app.use("/contacts", contactRouter);
+app.get('/project-detail', (req, res) => { res.render('project-detail'); });
 
 app.listen(port, () => {
-  console.logport(`server berjalan di ${port}`);
+  console.log(`server berjalan di ${port}`);
 });

@@ -1,0 +1,38 @@
+<nav>
+  <div class="main-menu">
+    <ul class="navbar-left">
+    <img src="../assets/img/logoweb.jpg" alt="logoweb" style="width: 60px" />
+{{!-- home --}}
+    <li><a class="menu-active {{#if (equal currentPage 'Home')}}
+    active fw-bold
+    {{/if}}" href="/home"> Home </a></li>
+{{!-- Project --}}
+    <li><a class="menu-active {{#if (equal currentPage 'Project')}}
+    active fw-bold
+    {{/if}}"href="/project" > Project </a></li>
+  </ul>
+
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+
+  {{#if user}}
+  <div class="text-end w-100 me-4">Selamat datang, {{user.name}}  </div>
+  {{/if}}
+
+  <a class="navbar-right {{#if (equal currentPage 'Home')}}
+    active fw-bold
+    {{/if}}"" href="/contact">Contact</a>
+  </div>
+  <div class="mobile-menu"> 
+    <img src="assets/img/logoweb.jpg" alt="logoweb" style="width: 60px" />
+   <button id="hamburger-icon" class="hamburger-icon">☰</button>
+  </div>
+  </nav>
+    <div id="mobile-menu-list" class="mobile-menu-list 
+    mobile-menu-hide">
+    <a href="index" class="menu-active">Home</a>
+    <a href="blog">Blog</a>
+    <a href="contact">Contact Me</a>
+  </div>

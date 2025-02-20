@@ -1,21 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Personal Web</title>
-    <link rel="icon" href="assets/img/logoweb.jpg" />
-    <link rel="stylesheet" href="assets/css/projek.css" />
-  </head>
-  <body>
-    <nav>
-      <ul class="navbar-left">
-        <img src="assets/img/logoweb.jpg" alt="logoweb" style="width: 60px" />
-        <li><a href="home.html"> Home </a></li>
-        <li><a href="project.html"> Project</a></li>
-      </ul>
-      <a class="navbar-right" href="contact.html">Contact Me</a>
-    </nav>
+{{#> layout}}
     <main class="contact-section">
       <form id="contactForm" class="contact-form">
         <h1>Contact Me</h1>
@@ -88,6 +71,4 @@
         <button type="submit" class="form-submit-button">Submit</button>
       </form>
     </main>
-    <script src="assets/js/contact.js"></script>
-  </body>
-</html>
+{{/layout}}

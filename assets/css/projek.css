@@ -21,30 +21,52 @@ body {
 /* navbar and homepage */
 nav {
   background-color: lightgrey;
+}
+
+.main-menu{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 30px;
+  padding:0;
 }
-
 .navbar-left{
-  display: flex;
-  gap: 20px;
-  list-style: none;
-  align-items: center;
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    align-items: center;
 }
 .navbar-left a {
-  text-decoration: none;
-  color: black;
+    text-decoration: none;
+    color: black;
 }
 .navbar-right{
-  text-decoration: none;
-  background-color: orangered;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 10px;
+    text-decoration: none;
+    background-color: orangered;
+    color: white;
+    margin-right: 20px;
+    padding: 10px 20px;
+    border-radius: 10px;
 }
 
+.mobile-menu{
+  display:none;
+}
+.mobile-menu-list{
+  display: none;
+}
+.hamburger-icon{
+  font-size: 36px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  margin: 50px;
+}
 
 /* home */
 .biru {
@@ -108,7 +130,6 @@ color: #555;
   }
 
 /* contact */
-/* kontak */
 .contact-section {
   height: 120vh;
   display: flex;
@@ -268,13 +289,6 @@ textarea {
 }
 
 
-
-
-
-
-
-
-
 .checkbox-item input[type="checkbox"]:focus + .checkbox-label::before {
   outline: none;
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.4);
@@ -345,7 +359,7 @@ input[type="file"]:hover {
 }
 
 .project-title {
-  text-align: center;
+  text-align: right;
   margin-bottom: 3em;
   font-size: 24px;
   font-weight: bold;
@@ -463,6 +477,29 @@ input[type="file"]:hover {
   display: flex;
   justify-content: space-between;
   gap: 4px;
+}
+
+.add {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.add-btn {
+  margin-left: auto;
+  text-decoration: none;
+  text-align: right;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .edit-btn,
