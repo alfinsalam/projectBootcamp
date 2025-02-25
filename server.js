@@ -1,28 +1,70 @@
 const express = require("express");
-const app = express();
-const port = 3000;
 const path = require("path");
 const hbs = require("hbs");
+const dotenv = require("dotenv");
+dotenv.config();
+const app = express();
+const flash = require ("express-flash");
+const session = require("express-session");
+const port = 3000;
+const {
+  index,
+  create,
+  store,
+  edit,
+  update,
+  getDetail,
+  destroy,
+  authRegister,
+  authLogin,
+  authLogout,
+  upload,
+} = require("./controllers/projectController");
+const { search } = require("./controllers/searchControllers");
+
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use("/assets", express.static(path.join(__dirname, "assets")));
+app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
+app.use(express.static('public'));
+app.use(session({
+  secret: "sjfeafjbkeana",
+  resave: false,
+  saveUninitialized: true
+}));
+app.use(flash());
+
 
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "views"));
-hbs.registerPartials(__dirname + "/views/partials", function (err) {});
-hbs.registerHelper("equal", function (a, b) {
-  return a === b;
+hbs.registerPartials(path.join(__dirname, "views", "partials"));
+hbs.registerHelper("equal", (a, b) => a === b);
+hbs.registerHelper("contains", (array, value) => {
+  return Array.isArray(array) && array.includes(value);
 });
-app.use("/assets", express.static(path.join(__dirname, "assets")));
-console.log("Serving static files from:", path.join(__dirname, "assets"));
 
-const { renderHome } = require("./controllers/homeController");
-const { renderProject } = require("./controllers/projectController");
-const { renderContact } = require("./controllers/contactController");
+// **Routing**
+app.get("/", (req, res) => res.redirect("/project"));
+app.get("/home", (req, res) => res.render("home", { user: req.session.user }));
+app.get("/contact", (req, res) => res.render("contact"));
+app.get("/testimonial", (req, res) => res.render("testimonial"));
+app.get("/search", search);
+app.get("/register", (req, res) => { res.render("authRegister");});
+app.post("/register", authRegister);
+app.get("/login", (req, res) => { res.render("authLogin");});
+app.post("/login", authLogin);
+app.get("/logout", authLogout)
 
-app.get("/home", renderHome);
-app.get("/contact", renderContact);
-app.get("/project", renderProject);
-
-app.get('/project-detail', (req, res) => { res.render('project-detail'); });
+// **Project Routes**
+app.get("/project", index);
+app.get("/project/create", create);
+app.post("/project", upload.single("image"), store);
+app.get("/project/:id/edit", edit);
+app.post("/project/:id/edit", upload.single("image"), update);
+app.get("/project-detail/:id", getDetail);
+app.post("/project/:id/delete", destroy);
 
 app.listen(port, () => {
-  console.log(`server berjalan di ${port}`);
+  console.log(`Server berjalan di http://localhost:${port}`);
 });

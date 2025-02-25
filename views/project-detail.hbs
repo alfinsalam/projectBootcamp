@@ -1,0 +1,23 @@
+{{#> layout currentPage="Project"}}
+<article class="detail-pryk">
+<h1 >{{project.title}}</h1>
+{{#if project.image}}
+  <img src="{{project.image}}" alt="https://picsum.photos/200" width="200">
+{{else}}
+  <p>No image available</p>
+{{/if}}
+
+<p><strong>Start Date:</strong> {{project.startDate}}</p>
+<p><strong>End Date:</strong> {{project.endDate}}</p>
+<p><strong>Description:</strong> {{project.description}}</p>
+
+<h3>Categories:</h3>
+<ul>
+  {{#each project.categories}}
+    <li>{{this}}</li>
+  {{/each}}
+</ul>
+
+</article>
+
+{{/layout}}

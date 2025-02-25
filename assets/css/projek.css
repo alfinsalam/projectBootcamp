@@ -171,7 +171,61 @@ color: #555;
   padding: 5px 20px;
   cursor: pointer;
 }
-  /* projek */
+
+
+/* login & register */
+.regist-section {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.regist-form {
+  width: 400px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+.form-label {
+  font-size: 18px;
+}
+
+.form-input {
+  border-radius: 5px;
+  border: 1px solid #cacaca;
+  padding: 7px;
+  font-size: 18px;
+}
+
+.form-submit-button {
+  color: white;
+  background-color: #007bff;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  padding: 5px 20px;
+  cursor: pointer;
+}
+/* project-detail */
+.detail-pryk {
+  width: 60%;
+  margin: 40px auto;
+}
+
+.detail-pryk h1 {
+  margin-left: auto; 
+};
+
+.detail-pryk img {
+width: 100%;  
+}
+  /* form projek */
 
 .container-form {
   padding: 4rem 2rem 2rem;
@@ -504,6 +558,7 @@ input[type="file"]:hover {
 
 .edit-btn,
 .delete-btn {
+  text-decoration: none;
   background-color: #007bff;
   color: white;
   border: none;

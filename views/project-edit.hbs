@@ -1,0 +1,38 @@
+{{#> layout currentPage="Project"}}
+<h1>Edit Project</h1>
+
+<form action="/project/{{project.id}}" method="POST" enctype="multipart/form-data">
+  <label>Project Title:</label>
+  <input type="text" name="title" value="{{project.title}}" required>
+
+  <label>Start Date:</label>
+  <input type="date" name="startDate" value="{{project.startDate}}" required>
+
+  <label>End Date:</label>
+  <input type="date" name="endDate" value="{{project.endDate}}" required>
+
+  <label>Description:</label>
+  <textarea name="description" required>{{project.description}}</textarea>
+
+  <h3>Categories:</h3>
+  <input type="checkbox" name="categories[]" value="React" {{#if (contains project.categories "React")}}checked{{/if}}> React
+  <input type="checkbox" name="categories[]" value="NextJs" {{#if (contains project.categories "NextJs")}}checked{{/if}}> NextJs
+  <input type="checkbox" name="categories[]" value="Laravel" {{#if (contains project.categories "Laravel")}}checked{{/if}}> Laravel
+  <input type="checkbox" name="categories[]" value="Vue" {{#if (contains project.categories "Vue")}}checked{{/if}}> Vue
+
+  <h3>Current Image:</h3>
+  {{#if project.image}}
+    <img src="/assets/images/{{project.image}}" alt="{{project.title}}" width="200">
+  {{else}}
+    <p>No image available</p>
+  {{/if}}
+
+  <label>Upload New Image:</label>
+  <input type="file" name="image">
+
+  <button type="submit">Update Project</button>
+</form>
+
+<a href="/project/{{project.id}}">Cancel</a>
+
+{{/layout}}

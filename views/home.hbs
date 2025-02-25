@@ -1,4 +1,9 @@
 {{#> layout currentPage="Home"}}
+{{#if messages.success}}
+      <div class="alert alert-success mx-5" role="alert">
+        {{messages.success}}
+      </div>
+  {{/if}}
 <main class="main=content">
  <!-- profile -->
  <div class="home">
@@ -9,12 +14,12 @@
       cupiditate eligendi ut inventore pariatur, incidunt nulla expedita ad
       rem magni!
     </p>
-    <a href="#" class="biru"> Contact </a>
+    <a href="/contact" class="biru"> Contact </a>
     <br>
     <br>
     <p>
       Download CV
-      <a href="#"
+      <a href="https://drive.google.com/drive/folders/1tXtEe_6F-ycHiUufK4r1o1ppRfnuFaaT?usp=sharing"
         ><img
           style="width: 20px; padding-left: 5px"
           src="assets/img/downloads.png"
@@ -22,13 +27,13 @@
       /></a>
     </p>
     <div class="sosmed">
-      <a style="padding: 10px" href="#"
+      <a style="padding: 10px" href="https://www.instagram.com/alfin_salam?igsh=YzljYTk10Dg3Zg=="
         ><img src="assets/img/instagram.png"
       /></a>
-      <a style="padding: 10px" href="#"
-        ><img src="assets/img/facebook.png"
+      <a style="padding: 10px" href="https://x.com/alfin__salam?t=UAvQ364r1oUoZh99b-Kitg&s=08"
+        ><img src="assets/img/twitter.png"
       /></a>
-      <a style="padding: 10px" href="#"
+      <a style="padding: 10px" href="https://github.com/alfinsalam/personalWeb.git"
         ><img src="assets/img/git.png"
       /></a>
     </div>

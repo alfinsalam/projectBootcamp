@@ -10,15 +10,19 @@
     <li><a class="menu-active {{#if (equal currentPage 'Project')}}
     active fw-bold
     {{/if}}"href="/project" > Project </a></li>
+ {{!-- Testimonial --}}
+    <li><a class="menu-active {{#if (equal currentPage 'Testimonials')}}
+    active fw-bold
+    {{/if}}"href="/testimonial" > Testimonials </a></li>
   </ul>
-
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+      <form class="d-flex align-items-center" action="/search" method="GET">
+        <input class="form-control" type="text" name="query" placeholder="Search..." aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">search</button>
       </form>
 
   {{#if user}}
-  <div class="text-end w-100 me-4">Selamat datang, {{user.name}}  </div>
+  <div class="ms-4px">Selamat datang, {{user.name}} :) </div>
+  <a href="/logout"> Logout </a>
   {{/if}}
 
   <a class="navbar-right {{#if (equal currentPage 'Home')}}
@@ -34,5 +38,6 @@
     mobile-menu-hide">
     <a href="index" class="menu-active">Home</a>
     <a href="blog">Blog</a>
+     <a href="testimonial">Testimonial</a>
     <a href="contact">Contact Me</a>
   </div>

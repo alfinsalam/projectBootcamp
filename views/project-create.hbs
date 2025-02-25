@@ -4,7 +4,7 @@
         <h1 class="form-title">Add My Project</h1>
         <form
           class="form"
-          action="#"
+          action="/project"
           method="POST"
           enctype="multipart/form-data"
         >
@@ -25,7 +25,7 @@
               <input
                 type="date"
                 id="start"
-                name="start"
+                name="startDate"
                 placeholder="start..."
                 required
                 class="start-date"
@@ -37,7 +37,7 @@
               <input
                 type="date"
                 id="end"
-                name="end"
+                name="endDate"
                 placeholder="end..."
                 required
                 class="end-date"
@@ -59,19 +59,19 @@
             <label for="category">Categories</label>
             <div class="checkbox-group">
               <label class="checkbox-item">
-                <input type="checkbox" name="category" value="React" />
+                <input type="checkbox" name="categories[]" value="React" />
                 <span class="checkbox-label">React</span>
               </label>
               <label class="checkbox-item">
-                <input type="checkbox" name="category" value="Laravel" />
+                <input type="checkbox" name="categories[]" value="Laravel" />
                 <span class="checkbox-label">Laravel</span>
               </label>
               <label class="checkbox-item">
-                <input type="checkbox" name="category" value="NextJs" />
+                <input type="checkbox" name="categories[]" value="NextJs" />
                 <span class="checkbox-label">NextJs</span>
               </label>
               <label class="checkbox-item">
-                <input type="checkbox" name="category" value="Vue" />
+                <input type="checkbox" name="categories[]" value="Vue" />
                 <span class="checkbox-label">Vue</span>
               </label>
             </div>
@@ -84,7 +84,6 @@
               id="image"
               name="image"
               accept="image/*"
-              required
             />
           </div>
 
@@ -92,4 +91,22 @@
         </form>
       </div>
     </div>
+    <script>
+     document.addEventListener("DOMContentLoaded", function () {
+       const form = document.querySelector(".form");
+       const startDateInput = document.querySelector(".start-date");
+       const endDateInput = document.querySelector(".end-date");
+
+       form.addEventListener("submit", function (event) {
+        const startDate = new Date(startDateInput.value);
+        const endDate = new Date(endDateInput.value);
+
+       if (startDate > endDate) {
+        alert("Error: Start Date tidak boleh lebih besar dari End Date!");
+        event.preventDefault(); // Mencegah form terkirim
+       }
+       });
+     });
+   </script>
+
 {{/layout}}

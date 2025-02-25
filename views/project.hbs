@@ -1,34 +1,47 @@
 {{#> layout currentPage="Project"}}
     
     <div class="bg-preview">
+      {{# if user}}
       <div class="add">
-        <a class="add-btn" href="/views/project-create.hbs">Create Project</a>
+        <a class="add-btn" href="/project/create">Create Project</a>
       </div>
+      {{/if}}
       <h2 class="project-title">My Project</h2>
       <div class="container-prview">
-        <div class="card-preview">
-          <div class="card-image">
-            <img class="card-img" src="assets/img/gambar.jpg" alt="Card Image" />
-          </div>
-          <div class="card-content">
-            <h2 class="card-title">Card Title</h2>
-            <p class="card-date">Posted on: <span>December 10, 2024</span></p>
-            <p class="card-description">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-              sit amet accumsan arcu.
-            </p>
-            <div class="card-actions">
-              <button class="edit-btn">Edit</button>
-              <button class="delete-btn">Delete</button>
+        {{#if projects.length}}  <!-- Menggunakan projects.length langsung -->
+          {{#each projects}}
+            <div class="card-preview">
+              <div class="card-image">
+                <img class="card-img" src="{{this.image}}" alt="Project Image" />
+              </div>
+              <div class="card-content">
+                <a href="project-detail/{{this.id}}" style="text-decoration: none; color:black">
+                <h2 class="card-title">{{this.title}}</h2>
+                </a>
+                <p class="card-date">Start Date: {{this.startDate}} - End Date: {{this.endDate}}</p>
+                <div class="overflow-auto" style="height: 70px; overflow-y: auto;"> 
+                <p class="card-description">{{this.description}}</p>
+                </div>
+                <p> categories {{this.categories}}</p>
+               
+                <div class="card-actions">
+                  {{#if user}}
+                  <a class="edit-btn" href="/project/{{this.id}}/edit">Edit</a>
+                  <form action="/project/{{this.id}}/delete" method="POST">
+                    <button onclick="return confirm('Are you sure you want to delete?')" class="delete-btn" type="submit">Delete</button>
+                  </form>
+                  {{/if}}
+                </div>
+
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div
-        id="no-data-message"
-        style="display: none; color: red; text-align: center"
-      >
-        Data belum tersedia.
+          {{/each}}
+        {{else}}
+          <p id="no-data-message" style="color: red; text-align: center; font-size: 18px; margin-top: 50px;">
+            Project not yet available.
+          </p>
+        {{/if}}
       </div>
     </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 {{/layout}}

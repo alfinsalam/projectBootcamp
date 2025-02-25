@@ -1,0 +1,36 @@
+{{#> layout currentPage="Search"}}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">🔍 Hasil Pencarian untuk "<span class="text-primary">{{query}}</span>"</h2>
+
+    {{#if searchResults.length}}
+        <div class="row">
+            {{#each searchResults}}
+                <div class="col-md-6 col-lg-4 mb-3">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="/{{this}}" class="text-decoration-none text-dark fw-bold">
+                                    {{this}}
+                                </a>
+                            </h5>
+                            <p class="text-muted mb-0">Klik judul diatas untuk melihat halaman</p>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    {{else}}
+        <div class="alert alert-warning text-center mt-4" role="alert">
+            ❌ Tidak ada hasil yang ditemukan untuk "<strong>{{query}}</strong>"
+        </div>
+    {{/if}}
+
+    <div class="text-center mt-4">
+        <a href="/" class="btn btn-primary">
+            ⬅ Kembali ke Beranda
+        </a>
+    </div>
+</div>
+
+{{/layout}}
