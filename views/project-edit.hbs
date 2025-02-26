@@ -1,38 +1,105 @@
 {{#> layout currentPage="Project"}}
-<h1>Edit Project</h1>
+    <div class="container-form">
+      <div class="bg-form">
+        <h1 class="form-title">Edit My Project</h1>
+        <form
+          class="form"
+          action="/project/{{project.id}}/edit"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              placeholder="Title..."
+              value="{{project.title}}"
+              required
+            />
+          </div>
 
-<form action="/project/{{project.id}}" method="POST" enctype="multipart/form-data">
-  <label>Project Title:</label>
-  <input type="text" name="title" value="{{project.title}}" required>
+          <div class="bg-date">
+            <div class="form-group">
+              <label for="start">Start Date</label>
+              <input
+                type="date"
+                id="start"
+                name="startDate"
+                value="{{project.startDate}}"
+                required
+                class="start-date"
+              />
+            </div>
 
-  <label>Start Date:</label>
-  <input type="date" name="startDate" value="{{project.startDate}}" required>
+            <div class="form-group">
+              <label for="end">End Date</label>
+              <input
+                type="date"
+                id="end"
+                name="endDate"
+                value="{{project.endDate}}"
+                required
+                class="end-date"
+              />
+            </div>
+          </div>
 
-  <label>End Date:</label>
-  <input type="date" name="endDate" value="{{project.endDate}}" required>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              placeholder="Description..."
+              required
+            >{{project.description}}</textarea>
+          </div>
 
-  <label>Description:</label>
-  <textarea name="description" required>{{project.description}}</textarea>
+          <div class="form-group">
+            <label for="category">Categories</label>
+            <div class="checkbox-group">
+              <label class="checkbox-item">
+                <input type="checkbox" name="categories[]" value="React" {{#if (contains project.categories "React")}}checked{{/if}} />
+                <span class="checkbox-label">React</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" name="categories[]" value="Laravel" {{#if (contains project.categories "Laravel")}}checked{{/if}} />
+                <span class="checkbox-label">Laravel</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" name="categories[]" value="NextJs" {{#if (contains project.categories "NextJs")}}checked{{/if}} />
+                <span class="checkbox-label">NextJs</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" name="categories[]" value="Vue" {{#if (contains project.categories "Vue")}}checked{{/if}} />
+                <span class="checkbox-label">Vue</span>
+              </label>
+            </div>
+          </div>
 
-  <h3>Categories:</h3>
-  <input type="checkbox" name="categories[]" value="React" {{#if (contains project.categories "React")}}checked{{/if}}> React
-  <input type="checkbox" name="categories[]" value="NextJs" {{#if (contains project.categories "NextJs")}}checked{{/if}}> NextJs
-  <input type="checkbox" name="categories[]" value="Laravel" {{#if (contains project.categories "Laravel")}}checked{{/if}}> Laravel
-  <input type="checkbox" name="categories[]" value="Vue" {{#if (contains project.categories "Vue")}}checked{{/if}}> Vue
+          <div class="form-group">
+            <label>Current Image</label>
+            {{#if project.image}}
+              <img src="{{project.image}}" alt="{{project.title}}" width="200" />
+            {{else}}
+              <p>No image available</p>
+            {{/if}}
+          </div>
 
-  <h3>Current Image:</h3>
-  {{#if project.image}}
-    <img src="/assets/images/{{project.image}}" alt="{{project.title}}" width="200">
-  {{else}}
-    <p>No image available</p>
-  {{/if}}
+          <div class="form-group">
+            <label for="image">Upload New Image</label>
+            <input
+              type="file"
+              id="image"
+              name="image"
+              accept="image/*"
+            />
+            <input type="hidden" name="oldImage" value="{{project.image}}">
+          </div>
 
-  <label>Upload New Image:</label>
-  <input type="file" name="image">
-
-  <button type="submit">Update Project</button>
-</form>
-
-<a href="/project/{{project.id}}">Cancel</a>
-
+          <button type="submit" class="submit-btn">Update Project</button>
+        </form>
+      </div>
+    </div>
 {{/layout}}

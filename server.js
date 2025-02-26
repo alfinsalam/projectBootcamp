@@ -1,6 +1,6 @@
 const express = require("express");
+const hbs = require("hbs")
 const path = require("path");
-const hbs = require("hbs");
 const dotenv = require("dotenv");
 dotenv.config();
 const app = express();
@@ -27,21 +27,33 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/assets", express.static(path.join(__dirname, "assets")));
 app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
+app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static('public'));
 app.use(session({
   secret: "sjfeafjbkeana",
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
 }));
 app.use(flash());
-
-
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "views"));
+hbs.registerHelper('json', function(context) {return JSON.stringify(context, null, 2);});
 hbs.registerPartials(path.join(__dirname, "views", "partials"));
+hbs.registerHelper("eq", (a, b) => a === b);
 hbs.registerHelper("equal", (a, b) => a === b);
 hbs.registerHelper("contains", (array, value) => {
   return Array.isArray(array) && array.includes(value);
+});
+app.use(session({
+  secret: "salkfnejbfwkbf",
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false } 
+}));
+app.use((req, res, next) => {
+  res.locals.user = req.session.user || null;
+  next();
 });
 
 // **Routing**

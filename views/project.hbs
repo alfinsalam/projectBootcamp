@@ -1,7 +1,7 @@
 {{#> layout currentPage="Project"}}
-    
+  
     <div class="bg-preview">
-      {{# if user}}
+      {{#if user}}
       <div class="add">
         <a class="add-btn" href="/project/create">Create Project</a>
       </div>
@@ -23,16 +23,12 @@
                 <p class="card-description">{{this.description}}</p>
                 </div>
                 <p> categories {{this.categories}}</p>
-               
                 <div class="card-actions">
-                  {{#if user}}
                   <a class="edit-btn" href="/project/{{this.id}}/edit">Edit</a>
                   <form action="/project/{{this.id}}/delete" method="POST">
                     <button onclick="return confirm('Are you sure you want to delete?')" class="delete-btn" type="submit">Delete</button>
                   </form>
-                  {{/if}}
                 </div>
-
               </div>
             </div>
           {{/each}}
@@ -43,5 +39,5 @@
         {{/if}}
       </div>
     </div>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 {{/layout}}

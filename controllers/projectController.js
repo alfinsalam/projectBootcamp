@@ -8,7 +8,7 @@ const saltRounds = 10
 // Konfigurasi multer untuk upload gambar
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const uploadDir = path.join(__dirname, "/assets");
+    const uploadDir = path.join(__dirname, "../public/uploads");
     if (!fs.existsSync(uploadDir)) {
       fs.mkdirSync(uploadDir, { recursive: true });
     }
@@ -48,7 +48,7 @@ const create = (req, res) => {
 
 const store = async (req, res) => {
   try {
-    const { title, startDate, endDate, description, categories } = req.body;
+    const { title, startDate, endDate, description, categories, userId } = req.body;
 
     if (!title || !startDate || !endDate || !description) {
       return res.status(400).send("Semua field wajib diisi kecuali gambar!");
@@ -67,6 +67,7 @@ const store = async (req, res) => {
       description,
       categories: formattedCategories,
       image,
+      userId: req.session.user.id,
     });
 
     res.redirect("/project");
@@ -74,6 +75,7 @@ const store = async (req, res) => {
     console.error("Error saat menyimpan project:", error);
     res.status(500).send("Terjadi kesalahan saat menyimpan project.");
   }
+  console.log("File uploaded:", req.file ? req.file.path : "No file uploaded");
 };
 
 // Detail Project
@@ -104,15 +106,17 @@ const edit = async (req, res) => {
 // Update Project
 const update = async (req, res) => {
   try {
+    console.log("Data dari form:", req.body);
+    console.log("File yang diupload:", req.file);
     const { title, startDate, endDate, description, categories } = req.body;
     const project = await Project.findByPk(req.params.id);
     if (!project) return res.status(404).send("Project tidak ditemukan");
 
     let formattedCategories = categories
       ? Array.isArray(categories)
-        ? categories.join(",") // Simpan sebagai string dengan koma
-        : categories
-      : "";
+        ? categories // Jika sudah array, simpan langsung
+        : [categories] // Jika bukan array, bungkus dalam array
+      : [];
 
     let image = req.file ? `/uploads/${req.file.filename}` : project.image;
 
@@ -122,6 +126,14 @@ const update = async (req, res) => {
       endDate,
       description,
       categories: formattedCategories,
+      image,
+    });
+    console.log("Data yang akan diupdate:", {
+      title,
+      startDate,
+      endDate,
+      description,
+      categories: formattedCategories, // Cek apakah array atau string
       image,
     });
 
@@ -211,7 +223,6 @@ async function authLogin(req, res) {
   delete loggedInUser.password;
 
   req.session.user = loggedInUser ;
-  console.log("Logged in user:", req.session.user); // Tambahkan log di sini
   req.flash("success", `${loggedInUser .name} Berhasil login :)`);
   res.redirect("/home");
 }
